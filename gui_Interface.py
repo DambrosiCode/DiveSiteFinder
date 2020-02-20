@@ -4,22 +4,30 @@ from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QSize, pyqtSlot    
 
+#Font Display
 FONT_SIZE = 15
 FONT_FAM = "Ariel"     
-
 
 #window size
 win_h = 500
 win_w = 500
 
-#textbox size
+#input textbox size
 tb_w = 40
 tb_h = 40
-        
-#text box position
+
+#input textbox position
 tb_x = 10
 tb_y = 30
 tb_sp = 5 #spacing between each box
+
+#output textbox size        
+otb_w = 250
+otb_h = 250
+
+#output textbox positions
+otb_x = win_h-otb_w-tb_sp
+otb_y = 0
 
 #text box properties 
 #text size and font
@@ -65,6 +73,11 @@ class HelloWindow(QMainWindow):
             self.box.append(QLineEdit(values[i], self))
             self.box[i].move(tb_x, (tb_y+tb_h*i+tb_sp*i))
             self.box[i].setFont(font)
+            
+        #text box for Diving information    
+        self.info_box = QLabel('DIVE NAME\nDIVE LOCATION', self)
+        self.info_box.move(otb_x, otb_y)
+        self.info_box.resize(otb_w, otb_h)
         
     def button(self):
         self.button = QPushButton('show text', self)
@@ -76,8 +89,31 @@ class HelloWindow(QMainWindow):
     def on_click(self):
         wint_val = self.box[0].text()
         
-        QMessageBox.question(self, 'Message - pythonspot.com', "You typed: " + textbox_value)
+        QMessageBox.question(self, 'Message - pythonspot.com', "You typed: " + wint_val)
         self.textbox.setText("")
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
