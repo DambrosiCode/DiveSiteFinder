@@ -1,8 +1,8 @@
 import sys
-from PyQt5.QtGui import QFont
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import QSize, pyqtSlot    
+from PyQt5.QtWidgets import * 
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 
 #Font Display
 FONT_SIZE = 15
@@ -64,21 +64,31 @@ class HelloWindow(QMainWindow):
     
     def text_boxes(self):
         #input values
-        values = ['Winter', 'Spring', 'Summer', 'Fall']
+        self.values = ['Winter', 'Spring', 'Summer', 'Fall']
         #set text box inputs
         self.box = []
     
         #each box is spaced from the first box at y+it's height (to prevent overlap)+space        
         for i in range(4):
-            self.box.append(QLineEdit(values[i], self))
+            self.box.append(QLineEdit(self.values[i], self))
             self.box[i].move(tb_x, (tb_y+tb_h*i+tb_sp*i))
             self.box[i].setFont(font)
-            
+        
+        
+        
         #text box for Diving information    
-        self.info_box = QLabel('DIVE NAME\nDIVE LOCATION', self)
+        self.info_box = QLabel(self)
+        self.info_box.setText('<b>Dive Location</b>\
+                              <br>You Are Here\
+                              <br>\
+                              <br><b>Contact Information</b>\
+                              <br>555.555.5555')
+        
         self.info_box.move(otb_x, otb_y)
         self.info_box.resize(otb_w, otb_h)
-        
+        self.info_box.setAlignment(Qt.AlignCenter)
+        self.info_box.setStyleSheet("QLabel {background-color: red;}")
+
     def button(self):
         self.button = QPushButton('show text', self)
         self.button.move(tb_x, (tb_y+tb_h*4+tb_sp*4))
@@ -89,8 +99,12 @@ class HelloWindow(QMainWindow):
     def on_click(self):
         wint_val = self.box[0].text()
         
-        QMessageBox.question(self, 'Message - pythonspot.com', "You typed: " + wint_val)
-        self.textbox.setText("")
+        #QMessageBox.question(self, 'Message - pythonspot.com', "You typed: " + wint_val)
+        self.info_box.setText('<b>Dive Location</b>\
+                              <br>'+str(self.values[0])+'\
+                              <br>\
+                              <br><b>Contact Information</b>\
+                              <br>'+str(self.values[0]))
         
         
         
