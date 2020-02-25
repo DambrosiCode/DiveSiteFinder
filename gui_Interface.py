@@ -1,8 +1,16 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Feb 20 19:28:09 2020
+
+@author: Matthew D'Ambrosio
+"""
 import sys
+from near_neigh import DiveFinder
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import * 
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
+
 
 #Font Display
 FONT_SIZE = 15
@@ -54,6 +62,8 @@ class HelloWindow(QMainWindow):
         self.text_boxes()
         self.button()
         
+        self.dive = DiveFinder()
+        
     def menu(self):
         menu = self.menuBar().addMenu('Action for quit')
         leave = menu.addAction('Quit')
@@ -97,14 +107,22 @@ class HelloWindow(QMainWindow):
         self.show()
 
     def on_click(self):
-        wint_val = self.box[0].text()
+        temps = []
         
+        #print(self.box[1].text())
+        for i in range(4):
+            temps.append(int(self.box[i].text()))
+        
+        loc = self.dive.dive_loc(temps[0], temps[1], temps[2], temps[3], 1).iloc[0]
+        contact = self.dive.dive_loc(temps[0], temps[1], temps[2], temps[3], 1).iloc[1]
+        print("YOUR LOCATION")
+        print(loc)
         #QMessageBox.question(self, 'Message - pythonspot.com', "You typed: " + wint_val)
         self.info_box.setText('<b>Dive Location</b>\
-                              <br>'+str(self.values[0])+'\
+                              <br>'+str(loc)+'\
                               <br>\
                               <br><b>Contact Information</b>\
-                              <br>'+str(self.values[0]))
+                              <br>'+str(contact)
         
         
         
