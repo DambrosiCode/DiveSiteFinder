@@ -48,7 +48,7 @@ class HelloWindow(QMainWindow):
         self.setStyleSheet("QLabel {font: "+str(FONT_SIZE)+"pt "+FONT_FAM+"}")
 
         self.setMinimumSize(QSize(win_h, win_w))    
-        self.setWindowTitle("Dive Site Finder 0.0.4") 
+        self.setWindowTitle("Dive Site Finder 0.0.5") 
         
         centralWidget = QWidget(self)          
         self.setCentralWidget(centralWidget)   
