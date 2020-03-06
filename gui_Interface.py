@@ -11,14 +11,13 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
-
 #Font Display
 FONT_SIZE = 15
 FONT_FAM = "Ariel"     
 
 #window size
-win_h = 500
-win_w = 500
+win_h = 600
+win_w = 300
 
 #input textbox size
 tb_w = 40
@@ -30,12 +29,12 @@ tb_y = 30
 tb_sp = 5 #spacing between each box
 
 #output textbox size        
-otb_w = 250
+otb_w = 400
 otb_h = 250
 
 #output textbox positions
 otb_x = win_h-otb_w-tb_sp
-otb_y = 0
+otb_y = 25
 
 #text box properties 
 #text size and font
@@ -49,7 +48,7 @@ class HelloWindow(QMainWindow):
         self.setStyleSheet("QLabel {font: "+str(FONT_SIZE)+"pt "+FONT_FAM+"}")
 
         self.setMinimumSize(QSize(win_h, win_w))    
-        self.setWindowTitle("Dive Site Finder 0.0.3") 
+        self.setWindowTitle("Dive Site Finder 0.0.4") 
         
         centralWidget = QWidget(self)          
         self.setCentralWidget(centralWidget)   
@@ -58,7 +57,6 @@ class HelloWindow(QMainWindow):
         centralWidget.setLayout(gridLayout)  
          
         self.menu()
-        self.titles()
         self.text_boxes()
         self.button()
         
@@ -69,12 +67,9 @@ class HelloWindow(QMainWindow):
         leave = menu.addAction('Quit')
         leave.triggered.connect(QtWidgets.QApplication.quit)
     
-    def titles(self):
-        pass
-    
     def text_boxes(self):
         #input values
-        self.values = ['Winter', 'Spring', 'Summer', 'Fall']
+        self.values = ['60', '60', '60', '60']
         #set text box inputs
         self.box = []
     
@@ -84,15 +79,11 @@ class HelloWindow(QMainWindow):
             self.box[i].move(tb_x, (tb_y+tb_h*i+tb_sp*i))
             self.box[i].setFont(font)
         
-        
-        
         #text box for Diving information    
         self.info_box = QLabel(self)
+        self.info_box.setWordWrap(True)
         self.info_box.setText('<b>Dive Location</b>\
-                              <br>You Are Here\
-                              <br>\
-                              <br><b>Contact Information</b>\
-                              <br>555.555.5555')
+                              <br>You Are Here')
         
         self.info_box.move(otb_x, otb_y)
         self.info_box.resize(otb_w, otb_h)
@@ -107,22 +98,15 @@ class HelloWindow(QMainWindow):
         self.show()
 
     def on_click(self):
-        temps = []
-        
+        temps = []     
         #print(self.box[1].text())
         for i in range(4):
             temps.append(int(self.box[i].text()))
         
-        loc = self.dive.dive_loc(temps[0], temps[1], temps[2], temps[3], 1).iloc[0]
-        contact = self.dive.dive_loc(temps[0], temps[1], temps[2], temps[3], 1).iloc[1]
-        print("YOUR LOCATION")
-        print(loc)
+        loc = self.dive.dive_loc(temps[0], temps[1], temps[2], temps[3], 1).iloc[0][0]
         #QMessageBox.question(self, 'Message - pythonspot.com', "You typed: " + wint_val)
         self.info_box.setText('<b>Dive Location</b>\
-                              <br>'+str(loc)+'\
-                              <br>\
-                              <br><b>Contact Information</b>\
-                              <br>'+str(contact)
+                              <br>'+str(loc).replace('Location ', ''))
         
         
         
@@ -149,8 +133,7 @@ class HelloWindow(QMainWindow):
         
         
         
-        
-if __name__ == "__main__":
+if __name__ == "__main__": 
     def run_app():
         app = QApplication([])
         app.setStyle('Fusion')
