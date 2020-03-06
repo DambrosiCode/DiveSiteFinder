@@ -103,7 +103,7 @@ class HelloWindow(QMainWindow):
         for i in range(4):
             temps.append(int(self.box[i].text()))
         
-        loc = self.dive.dive_loc(temps[0], temps[1], temps[2], temps[3], 1).iloc[0][0]
+        loc = self.dive.dive_loc(temps, 1).iloc[0][0]
         #QMessageBox.question(self, 'Message - pythonspot.com', "You typed: " + wint_val)
         self.info_box.setText('<b>Dive Location</b>\
                               <br>'+str(loc).replace('Location ', ''))

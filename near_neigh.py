@@ -15,7 +15,7 @@ class DiveFinder():
         #dataset location
         self.dive_sites_df = pd.read_csv('./dive_sites_2020.csv')
         
-        self.cats = np.array(['Winter','Spring','Summer','Fall'])
+        self.cats = np.array(['Winter','Spring','Summer','Fall'], dtype=str)
 
     def dive_loc(self, dive_params=[], n_neighbors=5):
         
@@ -34,8 +34,7 @@ class DiveFinder():
         dist, ind = self.neigh.kneighbors([data], n_neighbors=n_neighbors)
         
         near_neighs = self.dive_sites_df.dropna(subset=params).iloc[ind[0]]
-        #self.params(0,'Location')
-        #self.params(1,'Contact')
+        params = np.append(['Location'], params)
         return(near_neighs[params])
 
 dive = DiveFinder()
