@@ -11,6 +11,9 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
+#version number
+VERSION = '0.0.6'
+
 #Font Display
 FONT_SIZE = 15
 FONT_FAM = "Ariel"     
@@ -48,7 +51,7 @@ class HelloWindow(QMainWindow):
         self.setStyleSheet("QLabel {font: "+str(FONT_SIZE)+"pt "+FONT_FAM+"}")
 
         self.setMinimumSize(QSize(win_h, win_w))    
-        self.setWindowTitle("Dive Site Finder 0.0.5") 
+        self.setWindowTitle("Dive Site Finder "+ VERSION) 
         
         centralWidget = QWidget(self)          
         self.setCentralWidget(centralWidget)   
@@ -69,7 +72,7 @@ class HelloWindow(QMainWindow):
     
     def text_boxes(self):
         #input values
-        self.values = ['60', '60', '60', '60']
+        self.values = ['Winter', 'Spring', 'Summer', '60']
         #set text box inputs
         self.box = []
     
@@ -98,15 +101,29 @@ class HelloWindow(QMainWindow):
         self.show()
 
     def on_click(self):
-        temps = []     
-        #print(self.box[1].text())
+        temps = []
+        
+        #user input values
         for i in range(4):
-            temps.append(int(self.box[i].text()))
+            try:
+                temps.append(int(self.box[i].text()))
+            except:
+                pass
+            
+        loc = self.dive.dive_loc(temps, 1).iloc[0][0]
+        
+        #what was the temperatures that NN found
+        closest_temp = []
+        for i in range(len(temps)):
+            print(i)
+            closest_temp.append(self.dive.dive_loc(temps, 1).iloc[0][i+1])
         
         loc = self.dive.dive_loc(temps, 1).iloc[0][0]
-        #QMessageBox.question(self, 'Message - pythonspot.com', "You typed: " + wint_val)
+
         self.info_box.setText('<b>Dive Location</b>\
-                              <br>'+str(loc).replace('Location ', ''))
+                              <br>'+str(loc).replace('Location ', '') + 
+                              '<br><b>Temperature</b>\
+                              <br>'+str(closest_temp[0:]))
         
         
         
@@ -132,7 +149,7 @@ class HelloWindow(QMainWindow):
         
         
         
-        
+
 if __name__ == "__main__": 
     def run_app():
         app = QApplication([])
