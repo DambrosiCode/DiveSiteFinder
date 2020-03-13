@@ -109,8 +109,8 @@ class HelloWindow(QMainWindow):
                 temps.append(int(self.box[i].text()))
             except:
                 pass
-            
-        loc = self.dive.dive_loc(temps, 1).iloc[0][0]
+        nn_div_loc = self.dive.dive_loc(temps, 1)
+        loc = nn_div_loc.iloc[0][0]
         
         #what was the temperatures that NN found
         closest_temp = []
@@ -118,12 +118,12 @@ class HelloWindow(QMainWindow):
             print(i)
             closest_temp.append(self.dive.dive_loc(temps, 1).iloc[0][i+1])
         
-        loc = self.dive.dive_loc(temps, 1).iloc[0][0]
 
         self.info_box.setText('<b>Dive Location</b>\
                               <br>'+str(loc).replace('Location ', '') + 
                               '<br><b>Temperature</b>\
-                              <br>'+str(closest_temp[0:]))
+                              <br>'+str(closest_temp[0:]) + 
+                              '<br>'+str(nn_div_loc.columns))
         
         
         
