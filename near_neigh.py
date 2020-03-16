@@ -30,7 +30,7 @@ class DiveFinder():
         
         #if temp is int IE there's an input it will calculate the NN for that season(s)
         #inpts = [i for i, temp in enumerate(dive_params.values()) if type(temp)==int] #index of param
-        data = dive_params.values() #actual param number
+        data = list(dive_params.values()) #actual param number
         params = dive_params.keys() #param name
 
         #NN model
@@ -41,7 +41,7 @@ class DiveFinder():
         self.neigh = NearestNeighbors()
         self.neigh.fit(self.X)
         
-        dist, ind = self.neigh.kneighbors([65,65],n_neighbors=n_neighbors)
+        dist, ind = self.neigh.kneighbors([data],n_neighbors=n_neighbors)
         
         #calculate the nearest neighbors
         #dist, ind = self.neigh.kneighbors([60,100], n_neighbors=n_neighbors)
