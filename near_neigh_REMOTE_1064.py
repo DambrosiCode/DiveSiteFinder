@@ -20,6 +20,7 @@ class DiveFinder():
     def dive_loc(self, winter='Winter', spring='Spring', summer='Summer', fall='Fall', n_neighbors=5):
         dive_params = dict() #{ParamName:ParamValue}
         
+        
         #if the parameter value is quantifiable than is will be considered in the NN algo
         for i, param in enumerate([winter, spring, summer, fall]):
             if isinstance(param, int):
@@ -50,7 +51,6 @@ class DiveFinder():
         return(near_neighs[params])
 
 dive = DiveFinder()
-
 print(dive.dive_loc(spring=60, summer=100))
 
 

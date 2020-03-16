@@ -20,6 +20,14 @@ class DiveFinder():
     def dive_loc(self, winter='Winter', spring='Spring', summer='Summer', fall='Fall', n_neighbors=5):
         dive_params = dict() #{ParamName:ParamValue}
         
+<<<<<<< HEAD
+        #if temp is int IE there's an input it will calculate the NN for that season(s)
+        inpts = [i for i, temp in enumerate(dive_params) if type(temp)==int] #index of param
+        data = [temp for i, temp in enumerate(dive_params) if type(temp)==int] #actual param number
+        params = (self.cats[inpts]) #param name
+        print(data)                
+=======
+        
         #if the parameter value is quantifiable than is will be considered in the NN algo
         for i, param in enumerate([winter, spring, summer, fall]):
             if isinstance(param, int):
@@ -32,6 +40,7 @@ class DiveFinder():
         data = list(dive_params.values()) #actual param number
         params = dive_params.keys() #param name
 
+>>>>>>> seperate_params
         #NN model
         self.X = self.dive_sites_df[params].dropna()
         
@@ -50,8 +59,11 @@ class DiveFinder():
         return(near_neighs[params])
 
 dive = DiveFinder()
-
+<<<<<<< HEAD
+print(dive.dive_loc(['Winter', 60,'Summer', 70]))
+=======
 print(dive.dive_loc(spring=60, summer=100))
+>>>>>>> seperate_params
 
 
 
