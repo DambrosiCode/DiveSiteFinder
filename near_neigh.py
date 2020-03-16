@@ -41,7 +41,7 @@ class DiveFinder():
         self.neigh = NearestNeighbors()
         self.neigh.fit(self.X)
         
-        dist, ind = self.neigh.kneighbors([[65,65],[65,65]],n_neighbors=n_neighbors)
+        dist, ind = self.neigh.kneighbors([65,65],n_neighbors=n_neighbors)
         
         #calculate the nearest neighbors
         #dist, ind = self.neigh.kneighbors([60,100], n_neighbors=n_neighbors)
