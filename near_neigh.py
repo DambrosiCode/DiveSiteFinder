@@ -23,7 +23,7 @@ class DiveFinder():
         inpts = [i for i, temp in enumerate(dive_params) if type(temp)==int] #index of param
         data = [temp for i, temp in enumerate(dive_params) if type(temp)==int] #actual param number
         params = (self.cats[inpts]) #param name
-                
+        print(data)                
         #NN model
         self.X = self.dive_sites_df[params].dropna()
         self.X = np.array(self.X).reshape(-1,len(params))
@@ -37,8 +37,8 @@ class DiveFinder():
         params = np.append(['Location'], params)
         return(near_neighs[params])
 
-#dive = DiveFinder()
-#print(dive.dive_loc(['Winter', 60,'Summer', 70]))
+dive = DiveFinder()
+print(dive.dive_loc(['Winter', 60,'Summer', 70]))
 
 
 
