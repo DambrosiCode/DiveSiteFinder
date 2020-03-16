@@ -102,21 +102,22 @@ class HelloWindow(QMainWindow):
 
     def on_click(self):
         temps = []
-        
+        values = 0 #how many values input
         #user input values
         for i in range(4):
             try:
                 temps.append(int(self.box[i].text()))
+                values+=1
             except:
-                pass
+                temps.append(self.box[i].text())
+        print(temps)      
         nn_div_loc = self.dive.dive_loc(temps, 1)
         loc = nn_div_loc.iloc[0][0]
         
         #what was the temperatures that NN found
         closest_temp = []
-        for i in range(len(temps)):
-            print(i)
-            closest_temp.append(self.dive.dive_loc(winter=temps[0], spring=temps[1], summer=temps[2], fall=temps[3],
+        for i in range(values):
+            closest_temp.append(self.dive.dive_loc(winter=temps[0], spring=temps[1], summer=temps[2], fall=temps[3], 
                                                    n_neighbors=1).iloc[0][i+1])
         
 

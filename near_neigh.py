@@ -42,9 +42,9 @@ class DiveFinder():
         params = np.append('Location', params)
         return(near_neighs[params])
 
-dive = DiveFinder()
+#dive = DiveFinder()
 
-print(dive.dive_loc(winter=60, summer=100, n_neighbors=1))
+#print(dive.dive_loc(winter=60, summer=100, n_neighbors=1))
 
 
 
