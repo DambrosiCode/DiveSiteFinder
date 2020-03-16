@@ -116,7 +116,8 @@ class HelloWindow(QMainWindow):
         closest_temp = []
         for i in range(len(temps)):
             print(i)
-            closest_temp.append(self.dive.dive_loc(temps, 1).iloc[0][i+1])
+            closest_temp.append(self.dive.dive_loc(winter=temps[0], spring=temps[1], summer=temps[2], fall=temps[3],
+                                                   n_neighbors=1).iloc[0][i+1])
         
 
         self.info_box.setText('<b>Dive Location</b>\

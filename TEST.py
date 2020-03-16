@@ -8,6 +8,6 @@ from near_neigh import DiveFinder
 import numpy as np
 
 d = DiveFinder()
-print(d.dive_loc([50,20], 1))
+print(d.dive_loc(winter=40, n_neighbors=1))
 
 
